@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MVVMForReal.Factories;
 using MVVMForReal.Managers;
 using MVVMForReal.Models;
 
@@ -23,11 +24,16 @@ public class MainWindowViewModel : ObservableObject
             );
     }
 
-    public MainWindowViewModel(IDataManager dataManager, INavigationManager navigationManager)
+    public MainWindowViewModel(
+        IDataManager dataManager, 
+        INavigationManager navigationManager, 
+        IViewModelFactory<CenterViewModel> centerFactory)
     {
         _dataManager = dataManager;
         _dataModel = _dataManager.DataModel;
         _navigationManager = navigationManager;
+
+        _navigationManager.CurrentViewModel = centerFactory.Create();
 
         _navigationManager.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
