@@ -14,7 +14,7 @@ namespace MVVMForReal
     public partial class App : Application
     {
         public static IHost AppHost { get; private set; }
-        
+
         public App()
         {
             // Service Setup
@@ -36,7 +36,10 @@ namespace MVVMForReal
 
             // MainWindow Setup
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = new MainWindowViewModel(AppHost.Services.GetRequiredService<IDataManager>());
+            mainWindow.DataContext =
+                new MainWindowViewModel(
+                AppHost.Services.GetRequiredService<IDataManager>()
+                );
 
             mainWindow.Show();
 
