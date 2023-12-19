@@ -4,7 +4,18 @@ namespace MVVMForReal.Managers;
 
 public class NavigationManager : INavigationManager
 {
-    public ObservableObject CurrentViewModel { get; set; }
+    private ObservableObject _currentViewModel;
+
+    public ObservableObject CurrentViewModel
+    {
+        get { return _currentViewModel; }
+        set
+        {
+            _currentViewModel = value;
+            OnCurrentViewModelChanged();
+        }
+    }
+
     public event Action? CurrentViewModelChanged;
 
     public void OnCurrentViewModelChanged()
