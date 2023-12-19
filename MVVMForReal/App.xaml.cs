@@ -21,6 +21,7 @@ namespace MVVMForReal
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<IDataManager, DataManager>();
+                    services.AddScoped<INavigationManager, NavigationManager>();
 
                     services.AddViewModelFactory<MainWindowViewModel>();
 
