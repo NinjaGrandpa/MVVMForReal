@@ -1,8 +1,6 @@
 ﻿namespace MVVMForReal.Factories;
 
-public class ViewModelFactory<TViewModel> 
-    : IViewModelFactory<TViewModel>
-        where TViewModel : class
+public class ViewModelFactory<TViewModel> : IViewModelFactory<TViewModel>
 {
     private readonly Func<TViewModel> _factory;
 

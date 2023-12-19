@@ -1,6 +1,6 @@
 ﻿namespace MVVMForReal.Factories;
 
-public interface IViewModelFactory<out TViewModel> where TViewModel : class
+public interface IViewModelFactory<out TViewModel>
 {
     TViewModel Create();
 }
