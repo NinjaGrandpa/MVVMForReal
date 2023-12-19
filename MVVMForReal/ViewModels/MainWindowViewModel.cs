@@ -8,10 +8,20 @@ public class MainWindowViewModel : ObservableObject
 {
     private readonly IDataManager _dataManger;
 
-    public DataModel Counter { get; set; }
+    private readonly DataModel _dataModel;
+
+    // MVVM-property
+    private int _counter;
+
+    public int Counter
+    {
+        get => _counter;
+        set => SetProperty(ref _counter, value);
+    }
 
     public MainWindowViewModel(IDataManager dataManger)
     {
         _dataManger = dataManger;
+        _dataModel = _dataManger.DataModel;
     }
 }
