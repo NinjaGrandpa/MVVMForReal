@@ -4,6 +4,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVVMForReal.Managers;
+using MVVMForReal.ViewModels;
 
 namespace MVVMForReal
 {
@@ -16,7 +17,7 @@ namespace MVVMForReal
         
         public App()
         {
-            // Sätta upp alla beroenden och instansieringar
+            // Service Setup
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
@@ -24,7 +25,7 @@ namespace MVVMForReal
 
 
 
-                    
+                    services.AddSingleton<MainWindow>();
                 })
                 .Build();
         }
@@ -33,7 +34,11 @@ namespace MVVMForReal
         {
             await AppHost.StartAsync();
 
-            //Sätta upp MainWindow
+            // MainWindow Setup
+            var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = new MainWindowViewModel(AppHost.Services.GetRequiredService<IDataManager>());
+
+            mainWindow.Show();
 
             base.OnStartup(e);
         }
@@ -41,6 +46,7 @@ namespace MVVMForReal
         protected override async void OnExit(ExitEventArgs e)
         {
             await AppHost.StopAsync();
+
             base.OnExit(e);
         }
     }
