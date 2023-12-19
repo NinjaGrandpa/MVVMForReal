@@ -23,7 +23,7 @@ namespace MVVMForReal
                 {
                     services.AddSingleton<IDataManager, DataManager>();
 
-
+                    
 
                     services.AddSingleton<MainWindow>();
                 })
