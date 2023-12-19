@@ -6,12 +6,12 @@ namespace MVVMForReal.ViewModels;
 
 public class MainWindowViewModel : ObservableObject
 {
-    private readonly IDataManager _dataManger;
-
+    private readonly IDataManager _dataManager;
+    private readonly INavigationManager _navigationManager;
     private readonly DataModel _dataModel;
-
-    // MVVM-property
     private int _counter;
+
+    public ObservableObject CurrentViewModel => _navigationManager.CurrentViewModel;
 
     public int Counter
     {
@@ -23,9 +23,17 @@ public class MainWindowViewModel : ObservableObject
             );
     }
 
-    public MainWindowViewModel(IDataManager dataManger)
+    public MainWindowViewModel(IDataManager dataManager, INavigationManager navigationManager)
     {
-        _dataManger = dataManger;
-        _dataModel = _dataManger.DataModel;
+        _dataManager = dataManager;
+        _dataModel = _dataManager.DataModel;
+        _navigationManager = navigationManager;
+
+        _navigationManager.CurrentViewModelChanged += OnCurrentViewModelChanged;
+    }
+
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentViewModel));
     }
 }
