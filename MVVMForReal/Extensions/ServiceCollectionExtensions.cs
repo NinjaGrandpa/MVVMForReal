@@ -16,7 +16,9 @@ public static class ServiceCollectionExtensions
         services.AddTransient<Func<TViewModel>>
         (
             sp => 
-                () => sp.GetService<TViewModel>()
+                sp.GetRequiredService<TViewModel>
+
+            // sp => () => sp.GetService<TViewModel>
         );
 
         services.AddSingleton<IViewModelFactory<TViewModel>, ViewModelFactory<TViewModel>>();
