@@ -37,8 +37,8 @@ namespace MVVMForReal
 
             // MainWindow Setup
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = AppHost.Services.GetRequiredService<MainWindowViewModel>();
-
+            mainWindow.DataContext = AppHost.Services.GetRequiredService<MainWindowViewModel>();    
+            
             mainWindow.Show();
 
             base.OnStartup(e);
